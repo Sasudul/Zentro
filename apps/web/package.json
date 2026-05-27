@@ -1,0 +1,11 @@
+{
+  "name": "@pulse/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Web app will be initialized in Sprint 3\""
+  },
+  "dependencies": {
+    "@pulse/shared": "workspace:*"
+  }
+}
