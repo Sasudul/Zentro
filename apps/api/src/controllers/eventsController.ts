@@ -114,7 +114,7 @@ export async function listEvents(req: Request, res: Response, next: NextFunction
 
     // Check bookmarks if user is authenticated
     let bookmarkedIds = new Set<string>();
-    const userId = (req as any).session?.userId;
+    const userId = (req.user as any)?.id || (req as any).session?.userId;
     if (userId && eventIds.length > 0) {
       const bookmarkRows = await db
         .select({ event_id: bookmarks.event_id })
@@ -171,7 +171,7 @@ export async function listEvents(req: Request, res: Response, next: NextFunction
  */
 export async function getEvent(req: Request, res: Response, next: NextFunction) {
   try {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
 
     const eventRows = await db
       .select({
@@ -217,7 +217,7 @@ export async function getEvent(req: Request, res: Response, next: NextFunction) 
 
     // Check bookmark status
     let is_bookmarked = false;
-    const userId = (req as any).session?.userId;
+    const userId = (req.user as any)?.id || (req as any).session?.userId;
     if (userId) {
       const bookmarkRows = await db
         .select({ id: bookmarks.id })
@@ -271,7 +271,7 @@ export async function getEvent(req: Request, res: Response, next: NextFunction) 
  */
 export async function createEvent(req: Request, res: Response, next: NextFunction) {
   try {
-    const userId = (req as any).session?.userId;
+    const userId = (req.user as any)?.id || (req as any).session?.userId;
     if (!userId) {
       throw new ApiError(401, 'Unauthorized. Please sign in.');
     }
@@ -330,12 +330,12 @@ export async function createEvent(req: Request, res: Response, next: NextFunctio
  */
 export async function updateEvent(req: Request, res: Response, next: NextFunction) {
   try {
-    const userId = (req as any).session?.userId;
+    const userId = (req.user as any)?.id || (req as any).session?.userId;
     if (!userId) {
       throw new ApiError(401, 'Unauthorized. Please sign in.');
     }
 
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
 
     // Check ownership
     const [existing] = await db
@@ -411,12 +411,12 @@ export async function updateEvent(req: Request, res: Response, next: NextFunctio
  */
 export async function deleteEvent(req: Request, res: Response, next: NextFunction) {
   try {
-    const userId = (req as any).session?.userId;
+    const userId = (req.user as any)?.id || (req as any).session?.userId;
     if (!userId) {
       throw new ApiError(401, 'Unauthorized. Please sign in.');
     }
 
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
 
     // Check ownership
     const [existing] = await db

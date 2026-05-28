@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { EventFiltersSchema, CreateEventSchema, UpdateEventSchema } from '@pulse/shared';
 import { validateQuery, validate } from '../middleware/validate.js';
+import { requireAuth } from '../middleware/requireAuth.js';
 import {
   listEvents,
   getEvent,
@@ -15,9 +16,9 @@ const router = Router();
 router.get('/', validateQuery(EventFiltersSchema), listEvents);
 router.get('/:id', getEvent);
 
-// Protected routes (auth middleware will be added in Sprint 2)
-router.post('/', validate(CreateEventSchema), createEvent);
-router.put('/:id', validate(UpdateEventSchema), updateEvent);
-router.delete('/:id', deleteEvent);
+// Protected routes
+router.post('/', requireAuth, validate(CreateEventSchema), createEvent);
+router.put('/:id', requireAuth, validate(UpdateEventSchema), updateEvent);
+router.delete('/:id', requireAuth, deleteEvent);
 
 export default router;
