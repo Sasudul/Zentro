@@ -1,0 +1,91 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding-bottom: var(--space-24);
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.filter-tabs {
+  display: flex;
+  gap: var(--space-8);
+  overflow-x: auto;
+  padding-bottom: var(--space-4);
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tab {
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background-color: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.filter-tab:hover {
+  border-color: var(--text-main);
+  color: var(--text-main);
+}
+
+.filter-tab.active {
+  background-color: var(--text-main);
+  color: var(--bg-main);
+  border-color: var(--text-main);
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+/* Active filter chips */
+.active-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--bg-hover);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-full);
+}
+
+.filter-chip-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.filter-chip-remove:hover {
+  color: var(--text-main);
+}

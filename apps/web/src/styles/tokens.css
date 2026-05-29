@@ -1,0 +1,71 @@
+:root {
+  /* Spacing Scale */
+  --space-2: 0.125rem;
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-96: 6rem;
+
+  /* Border Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Font Families */
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Theme Variables */
+:root, [data-theme="light"] {
+  --bg-main: hsl(30, 20%, 97%);         /* Warm eggshell */
+  --bg-card: hsl(30, 20%, 99%);         /* Clean soft white card */
+  --bg-hover: hsl(30, 15%, 94%);        /* Subtle tint on hover */
+  
+  --text-main: hsl(210, 11%, 15%);      /* Deep slate/charcoal text */
+  --text-muted: hsl(210, 10%, 45%);     /* Secondary body text */
+  --text-inverse: hsl(30, 20%, 97%);    /* Light text on dark bg */
+  
+  --accent: hsl(14, 88%, 56%);          /* Rust orange */
+  --accent-glow: hsla(14, 88%, 56%, 0.15);
+  
+  --border: hsl(30, 10%, 88%);          /* Subtle paper borders */
+  --border-focus: hsl(210, 11%, 15%);
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.02);
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --bg-main: hsl(210, 11%, 8%);         /* Dark obsidian */
+  --bg-card: hsl(210, 11%, 12%);        /* Soft textured charcoal */
+  --bg-hover: hsl(210, 11%, 16%);       /* Muted hover background */
+  
+  --text-main: hsl(30, 20%, 92%);       /* Warm cream text */
+  --text-muted: hsl(210, 8%, 65%);      /* Secondary muted grey */
+  --text-inverse: hsl(210, 11%, 8%);    /* Dark text on light bg */
+  
+  --accent: hsl(14, 88%, 62%);          /* Bright rust orange */
+  --accent-glow: hsla(14, 88%, 62%, 0.25);
+  
+  --border: hsl(210, 11%, 18%);         /* Subtle border for dark panels */
+  --border-focus: hsl(30, 20%, 92%);
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.15);
+}

@@ -1,0 +1,94 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: var(--space-12) var(--space-24);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  line-height: 1.2;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--text-main);
+  color: var(--bg-main);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-main);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--text-main);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-main);
+}
+
+/* Bookmark Icon Button */
+.btn-bookmark {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-bookmark:hover {
+  border-color: var(--text-main);
+  color: var(--text-main);
+  transform: scale(1.06);
+}
+
+.btn-bookmark.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background-color: var(--accent-glow);
+}
+
+/* Custom Editorial Serif Link */
+.editorial-link {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--text-main);
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 2px;
+  transition: border-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.editorial-link:hover {
+  border-color: var(--text-main);
+}
