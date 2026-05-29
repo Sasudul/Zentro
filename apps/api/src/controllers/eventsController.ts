@@ -265,6 +265,8 @@ export async function getEvent(req: Request, res: Response, next: NextFunction) 
   }
 }
 
+import { geocodeAddress } from '../services/geocodeService.js';
+
 /**
  * POST /api/events
  * Create a new event.
@@ -278,12 +280,25 @@ export async function createEvent(req: Request, res: Response, next: NextFunctio
 
     const { tags: tagNames, ...eventData } = req.body;
 
+    // Try to geocode if address and city are provided
+    let lat = null;
+    let lng = null;
+    if (eventData.address && eventData.city) {
+      const coords = await geocodeAddress(eventData.address, eventData.city);
+      if (coords) {
+        lat = coords.lat.toString();
+        lng = coords.lng.toString();
+      }
+    }
+
     // Insert the event
     const [newEvent] = await db
       .insert(events)
       .values({
         ...eventData,
         organizer_id: userId,
+        latitude: lat,
+        longitude: lng,
         start_time: new Date(eventData.start_time),
         end_time: new Date(eventData.end_time),
       })
@@ -359,6 +374,19 @@ export async function updateEvent(req: Request, res: Response, next: NextFunctio
     }
     if (updateData.end_time) {
       updateData.end_time = new Date(updateData.end_time);
+    }
+
+    // Try to geocode if address and city are provided (or updated)
+    if (updateData.address || updateData.city) {
+      const address = updateData.address || existing.address;
+      const city = updateData.city || existing.city;
+      if (address && city) {
+        const coords = await geocodeAddress(address as string, city as string);
+        if (coords) {
+          updateData.latitude = coords.lat.toString();
+          updateData.longitude = coords.lng.toString();
+        }
+      }
     }
 
     const [updated] = await db

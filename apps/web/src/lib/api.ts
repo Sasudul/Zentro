@@ -89,4 +89,32 @@ export const api = {
       });
     },
   },
+
+  weather: {
+    getCurrent: async (city: string): Promise<any> => {
+      const response = await request<{ data: any }>(`/api/weather/current?city=${encodeURIComponent(city)}`);
+      return response.data;
+    },
+    getForecast: async (city: string, date: string): Promise<any> => {
+      const response = await request<{ data: any }>(`/api/weather/forecast?city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}`);
+      return response.data;
+    },
+  },
+
+  bookmarks: {
+    list: async (): Promise<Event[]> => {
+      const response = await request<{ data: Event[] }>('/api/bookmarks');
+      return response.data;
+    },
+    add: async (eventId: string): Promise<{ success: boolean }> => {
+      return request<{ success: boolean }>(`/api/bookmarks/${eventId}`, {
+        method: 'POST',
+      });
+    },
+    remove: async (eventId: string): Promise<{ success: boolean }> => {
+      return request<{ success: boolean }>(`/api/bookmarks/${eventId}`, {
+        method: 'DELETE',
+      });
+    },
+  },
 };

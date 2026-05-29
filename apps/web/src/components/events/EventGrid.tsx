@@ -3,7 +3,7 @@
 import { useFilterStore } from '@/store/filterStore';
 import { useEvents } from '@/hooks/useEvents';
 import EventCard from './EventCard';
-import { EventCardSkeleton } from '../ui/Skeleton';
+import { EventCardSkeleton } from '@/components/ui/Skeleton';
 import { SlidersHorizontal } from 'lucide-react';
 
 export default function EventGrid() {

@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, MapPin, Bookmark } from 'lucide-react';
 import type { Event } from '@/types/index';
-import { Badge } from '../ui/Badge';
-import { TagPill } from '../ui/TagPill';
+import { Badge } from '@/components/ui/Badge';
+import { TagPill } from '@/components/ui/TagPill';
 import { formatDate, formatTimeRange } from '@/lib/utils';
 
 interface EventCardProps {

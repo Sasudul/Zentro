@@ -10,15 +10,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
     "@pulse/shared": "workspace:*",
     "@tanstack/react-query": "^5.38.0",
+    "@tiptap/extension-placeholder": "^3.23.6",
+    "@tiptap/react": "^3.23.6",
+    "@tiptap/starter-kit": "^3.23.6",
+    "@vis.gl/react-google-maps": "^1.8.3",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "framer-motion": "^12.40.0",
     "lucide-react": "^0.379.0",
     "next": "^14.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.76.1",
     "tailwind-merge": "^2.3.0",
+    "zod": "^3.25.76",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

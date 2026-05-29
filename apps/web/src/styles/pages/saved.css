@@ -1,0 +1,22 @@
+.saved-page {
+  min-height: calc(100vh - 80px);
+  padding: var(--space-8) 0;
+}
+
+.saved-header {
+  margin-bottom: var(--space-8);
+}
+
+.saved-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-16) var(--space-4);
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-2xl);
+  max-width: 600px;
+  margin: 0 auto;
+}

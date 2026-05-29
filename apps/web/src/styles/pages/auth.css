@@ -1,0 +1,34 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  background: var(--background);
+}
+
+.auth-sidebar {
+  display: none;
+  width: 45%;
+  background: var(--foreground);
+  color: var(--background);
+  padding: var(--space-12);
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+  .auth-sidebar {
+    display: flex;
+  }
+}
+
+.auth-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 400px;
+}
