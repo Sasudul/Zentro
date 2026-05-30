@@ -1,71 +1,126 @@
 :root {
-  /* Spacing Scale */
   --space-2: 0.125rem;
   --space-4: 0.25rem;
+  --space-6: 0.375rem;
   --space-8: 0.5rem;
+  --space-10: 0.625rem;
   --space-12: 0.75rem;
   --space-16: 1rem;
+  --space-20: 1.25rem;
   --space-24: 1.5rem;
   --space-32: 2rem;
+  --space-40: 2.5rem;
   --space-48: 3rem;
   --space-64: 4rem;
   --space-96: 6rem;
 
-  /* Border Radii */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
   --radius-full: 9999px;
 
-  /* Font Families */
   --font-serif: 'Lora', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  /* Transitions */
   --transition-fast: 150ms ease;
   --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Light Theme Variables */
+/* ── Light: Warm Canvas ── */
 :root, [data-theme="light"] {
-  --bg-main: hsl(30, 20%, 97%);         /* Warm eggshell */
-  --bg-card: hsl(30, 20%, 99%);         /* Clean soft white card */
-  --bg-hover: hsl(30, 15%, 94%);        /* Subtle tint on hover */
-  
-  --text-main: hsl(210, 11%, 15%);      /* Deep slate/charcoal text */
-  --text-muted: hsl(210, 10%, 45%);     /* Secondary body text */
-  --text-inverse: hsl(30, 20%, 97%);    /* Light text on dark bg */
-  
-  --accent: hsl(14, 88%, 56%);          /* Rust orange */
-  --accent-glow: hsla(14, 88%, 56%, 0.15);
-  
-  --border: hsl(30, 10%, 88%);          /* Subtle paper borders */
-  --border-focus: hsl(210, 11%, 15%);
-  
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.02);
+  --color-bg: #FAF9F6;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F4F2EE;
+  --color-surface-3: #EAE8E2;
+
+  --color-border: #E6E4E0;
+  --color-border-strong: #CCCAC4;
+
+  --color-accent: #C85A32;
+  --color-accent-light: #F2E4DC;
+  --color-accent-dark: #9E3F1E;
+
+  --color-live: #2E6E4E;
+  --color-live-bg: #E6F3EC;
+  --color-upcoming: #1A5FAB;
+  --color-upcoming-bg: #E5EEFA;
+  --color-past: #9A9790;
+  --color-saved: #B85A1C;
+  --color-saved-bg: #FDF0E8;
+
+  --color-text-primary: #1C1A17;
+  --color-text-secondary: #706E6B;
+  --color-text-muted: #A8A5A0;
+  --color-text-on-accent: #FFFFFF;
+
+  --weather-clear: rgba(200, 90, 50, 0.04);
+  --weather-rain: rgba(60, 100, 200, 0.05);
+  --weather-cloud: rgba(120, 120, 130, 0.04);
+  --weather-storm: rgba(100, 40, 40, 0.05);
+
+  --shadow-sm: 0 1px 3px rgba(28, 26, 23, 0.06);
+  --shadow-md: 0 4px 12px rgba(28, 26, 23, 0.08);
+  --shadow-lg: 0 12px 32px rgba(28, 26, 23, 0.10);
+
+  /* backward compat aliases */
+  --bg-main: var(--color-bg);
+  --bg-card: var(--color-surface);
+  --bg-hover: var(--color-surface-3);
+  --text-main: var(--color-text-primary);
+  --text-muted: var(--color-text-secondary);
+  --accent: var(--color-accent);
+  --accent-glow: var(--color-accent-light);
+  --border: var(--color-border);
+  --border-focus: var(--color-border-strong);
 }
 
-/* Dark Theme Variables */
+/* ── Dark: Midnight Obsidian ── */
 [data-theme="dark"] {
-  --bg-main: hsl(210, 11%, 8%);         /* Dark obsidian */
-  --bg-card: hsl(210, 11%, 12%);        /* Soft textured charcoal */
-  --bg-hover: hsl(210, 11%, 16%);       /* Muted hover background */
-  
-  --text-main: hsl(30, 20%, 92%);       /* Warm cream text */
-  --text-muted: hsl(210, 8%, 65%);      /* Secondary muted grey */
-  --text-inverse: hsl(210, 11%, 8%);    /* Dark text on light bg */
-  
-  --accent: hsl(14, 88%, 62%);          /* Bright rust orange */
-  --accent-glow: hsla(14, 88%, 62%, 0.25);
-  
-  --border: hsl(210, 11%, 18%);         /* Subtle border for dark panels */
-  --border-focus: hsl(30, 20%, 92%);
-  
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.15);
+  --color-bg: #121110;
+  --color-surface: #1A1917;
+  --color-surface-2: #222018;
+  --color-surface-3: #2B2A26;
+
+  --color-border: #2B2A27;
+  --color-border-strong: #3E3C38;
+
+  --color-accent: #D46B43;
+  --color-accent-light: #2E1F18;
+  --color-accent-dark: #E8895E;
+
+  --color-live: #3DAD76;
+  --color-live-bg: #0E2218;
+  --color-upcoming: #5B9CF6;
+  --color-upcoming-bg: #0D1E35;
+  --color-past: #5A5854;
+  --color-saved: #D46B43;
+  --color-saved-bg: #231510;
+
+  --color-text-primary: #F0EFEA;
+  --color-text-secondary: #9A9790;
+  --color-text-muted: #5C5A56;
+  --color-text-on-accent: #FFFFFF;
+
+  --weather-clear: rgba(212, 107, 67, 0.06);
+  --weather-rain: rgba(80, 130, 220, 0.07);
+  --weather-cloud: rgba(140, 140, 150, 0.05);
+  --weather-storm: rgba(150, 60, 60, 0.07);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.20);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.36);
+
+  --bg-main: var(--color-bg);
+  --bg-card: var(--color-surface);
+  --bg-hover: var(--color-surface-3);
+  --text-main: var(--color-text-primary);
+  --text-muted: var(--color-text-secondary);
+  --accent: var(--color-accent);
+  --accent-glow: var(--color-accent-light);
+  --border: var(--color-border);
+  --border-focus: var(--color-border-strong);
 }

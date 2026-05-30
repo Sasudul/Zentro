@@ -10,95 +10,39 @@ export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
 
   return (
-    <nav style={{
-      borderBottom: '1px solid var(--border)',
-      backgroundColor: 'var(--bg-card)',
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-    }}>
-      <div style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '0 var(--space-24)',
-        height: '68px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 'var(--space-16)',
-      }}>
-        {/* Editorial Logo */}
-        <Link href="/" className="font-serif tracking-tight text-xl font-bold" style={{
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
-        }}>
+    <nav className="navbar">
+      <div className="navbar-inner">
+        <Link href="/" className="navbar-logo">
           P U L S E<span className="text-accent">.</span>
         </Link>
 
-        {/* Global Search Box (Trigger Placeholder for Sprint 5 Cmd+K) */}
-        <div style={{
-          position: 'relative',
-          maxWidth: '400px',
-          width: '100%',
-          display: 'none', // Handled responsively in media queries or layout
-        }} className="md:block">
-          <Search className="w-4 h-4 text-muted" style={{
-            position: 'absolute',
-            left: 'var(--space-16)',
-            top: '50%',
-            transform: 'translateY(-50%)',
-          }} />
+        <div className="navbar-search">
+          <Search className="navbar-search-icon" style={{ width: '14px', height: '14px' }} />
           <input
             type="text"
-            placeholder="Search events, cities, topics... (Ctrl+K)"
-            className="input-field text-sm"
-            style={{
-              paddingLeft: 'calc(var(--space-16) + 20px)',
-              height: '38px',
-            }}
+            placeholder="Search events... (Ctrl+K)"
+            className="input-field"
             readOnly
-            onClick={() => console.log('Search opened')}
           />
         </div>
 
-        {/* Action Controls */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 'var(--space-16)',
-        }}>
+        <div className="navbar-actions">
           <ThemeToggle />
 
           <Link href="/saved" className="btn-bookmark" aria-label="Bookmarks">
-            <Bookmark className="w-4 h-4" />
+            <Bookmark style={{ width: '16px', height: '16px' }} />
           </Link>
 
-          {/* Plus Event CTA */}
-          <Link href="/events/create" className="btn btn-secondary" style={{
-            padding: 'var(--space-8) var(--space-16)',
-            fontSize: '0.8125rem',
-            height: '36px',
-            borderRadius: 'var(--radius-full)',
-          }}>
-            <Plus className="w-3.5 h-3.5" />
+          <Link href="/events/create" className="btn btn-secondary navbar-create-btn">
+            <Plus style={{ width: '14px', height: '14px' }} />
             <span>Create Event</span>
           </Link>
 
-          {/* User Profile / Access Trigger */}
           {isAuthenticated && user ? (
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-12)',
-            }}>
+            <div className="navbar-user">
               <div className="event-card-organizer-avatar">
                 {user.avatar_url ? (
-                  <Image
-                    src={user.avatar_url}
-                    alt={user.name}
-                    width={24}
-                    height={24}
-                  />
+                  <Image src={user.avatar_url} alt={user.name} width={24} height={24} />
                 ) : (
                   <div style={{
                     width: '100%',
@@ -108,18 +52,14 @@ export default function Navbar() {
                     justifyContent: 'center',
                     fontSize: '10px',
                     fontWeight: 700,
-                    backgroundColor: 'var(--accent-glow)',
-                    color: 'var(--accent)',
+                    backgroundColor: 'var(--color-accent-light)',
+                    color: 'var(--color-accent)',
                   }}>
                     {user.name[0].toUpperCase()}
                   </div>
                 )}
               </div>
-              <button
-                onClick={() => logout()}
-                className="btn-ghost text-xs"
-                style={{ cursor: 'pointer', padding: 0 }}
-              >
+              <button onClick={() => logout()} className="btn btn-ghost btn-sm" style={{ cursor: 'pointer' }}>
                 Log Out
               </button>
             </div>

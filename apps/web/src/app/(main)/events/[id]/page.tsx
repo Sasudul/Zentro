@@ -25,7 +25,7 @@ export default async function EventPage({ params }: Props) {
   try {
     const event = await api.events.get(params.id);
     return (
-      <main className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <main style={{ padding: 'var(--space-48) 0' }}>
         <EventDetail event={event} />
       </main>
     );
@@ -34,9 +34,9 @@ export default async function EventPage({ params }: Props) {
       notFound();
     }
     return (
-      <div className="container mx-auto px-4 py-24 text-center">
-        <h1 className="text-2xl font-serif text-foreground">Error loading event</h1>
-        <p className="text-muted-foreground mt-2">Please try again later.</p>
+      <div style={{ padding: 'var(--space-96) var(--space-24)', textAlign: 'center' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--color-text-primary)' }}>Error loading event</h1>
+        <p className="text-secondary" style={{ marginTop: 'var(--space-8)' }}>Please try again later.</p>
       </div>
     );
   }

@@ -8,8 +8,15 @@
 @import '../styles/components/button.css';
 @import '../styles/components/input.css';
 @import '../styles/components/filter-bar.css';
+@import '../styles/components/map-panel.css';
+@import '../styles/components/modal.css';
 
-/* Custom layouts and high-level wrappers */
+@import '../styles/pages/home.css';
+@import '../styles/pages/detail.css';
+@import '../styles/pages/auth.css';
+@import '../styles/pages/create.css';
+@import '../styles/pages/saved.css';
+
 body {
   min-height: 100vh;
   display: flex;
@@ -19,26 +26,105 @@ body {
 .main-content {
   flex-grow: 1;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: var(--space-24);
+  padding: 0 var(--space-24);
 }
 
-/* Scrollbar styling */
+/* navbar */
+.navbar {
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--space-24);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+}
+
+.navbar-logo {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.navbar-search {
+  position: relative;
+  max-width: 360px;
+  width: 100%;
+  display: none;
+}
+
+.navbar-search-icon {
+  position: absolute;
+  left: var(--space-12);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+}
+
+.navbar-search input {
+  padding-left: calc(var(--space-12) + 20px);
+  height: 36px;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.navbar-create-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-16);
+  font-size: 0.8125rem;
+  height: 36px;
+  border-radius: var(--radius-full);
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .navbar-search {
+    display: block;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-main);
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--color-border);
   border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: var(--color-text-muted);
 }

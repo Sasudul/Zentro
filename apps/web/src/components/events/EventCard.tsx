@@ -6,7 +6,7 @@ import { Calendar, MapPin, Bookmark } from 'lucide-react';
 import type { Event } from '@/types/index';
 import { Badge } from '@/components/ui/Badge';
 import { TagPill } from '@/components/ui/TagPill';
-import { formatDate, formatTimeRange } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 
 interface EventCardProps {
   event: Event;
@@ -15,17 +15,14 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, isBookmarked = false, onBookmarkToggle }: EventCardProps) {
-  // Safe category casting
   const categoryVariant = ['conference', 'meetup', 'hackathon', 'workshop', 'other', 'live'].includes(event.category)
     ? (event.category as any)
     : 'other';
 
-  // Format location string
   const locationString = event.format === 'virtual'
     ? 'Virtual Session'
     : [event.location_city, event.location_country].filter(Boolean).join(', ');
 
-  // Standard high-quality event banner placeholder
   const imageUrl = event.image_url || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60';
 
   return (
@@ -45,14 +42,13 @@ export default function EventCard({ event, isBookmarked = false, onBookmarkToggl
       <div className="event-card-content">
         <div className="event-card-header">
           <Badge variant={categoryVariant}>{event.category}</Badge>
-          
           <button
             onClick={onBookmarkToggle}
             className={`btn-bookmark ${isBookmarked ? 'active' : ''}`}
             aria-label="Bookmark event"
             style={{ width: '30px', height: '30px' }}
           >
-            <Bookmark className="w-3.5 h-3.5" />
+            <Bookmark style={{ width: '14px', height: '14px' }} />
           </button>
         </div>
 
@@ -60,25 +56,23 @@ export default function EventCard({ event, isBookmarked = false, onBookmarkToggl
           <h3 className="event-card-title">{event.title}</h3>
         </Link>
 
-        {/* Date & Location list */}
         <div className="event-card-meta">
           <div className="event-card-meta-item">
-            <Calendar className="w-3.5 h-3.5 text-accent" />
+            <Calendar style={{ width: '14px', height: '14px' }} />
             <span>{formatDate(event.start_time, 'MMM d, yyyy')}</span>
           </div>
           <div className="event-card-meta-item">
-            <MapPin className="w-3.5 h-3.5 text-accent" />
+            <MapPin style={{ width: '14px', height: '14px' }} />
             <span>{locationString}</span>
           </div>
         </div>
 
         {event.description ? (
           <p className="event-card-description" dangerouslySetInnerHTML={{
-            __html: event.description.replace(/<[^>]*>/g, '') // Strip HTML for grid preview
+            __html: event.description.replace(/<[^>]*>/g, '')
           }} />
         ) : null}
 
-        {/* Tags lists */}
         {event.tags && event.tags.length > 0 ? (
           <div className="event-card-tags">
             {event.tags.slice(0, 3).map((tag) => (
@@ -92,22 +86,14 @@ export default function EventCard({ event, isBookmarked = false, onBookmarkToggl
             <div className="event-card-organizer">
               <div className="event-card-organizer-avatar">
                 {event.organizer.avatar_url ? (
-                  <Image
-                    src={event.organizer.avatar_url}
-                    alt={event.organizer.name}
-                    width={24}
-                    height={24}
-                  />
+                  <Image src={event.organizer.avatar_url} alt={event.organizer.name} width={24} height={24} />
                 ) : (
                   <div style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    width: '100%', height: '100%',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '10px',
-                    backgroundColor: 'var(--accent-glow)',
-                    color: 'var(--accent)',
+                    backgroundColor: 'var(--color-accent-light)',
+                    color: 'var(--color-accent)',
                   }}>
                     {event.organizer.name[0]}
                   </div>
@@ -120,7 +106,7 @@ export default function EventCard({ event, isBookmarked = false, onBookmarkToggl
           )}
 
           {event.attendee_count ? (
-            <span className="text-xs text-muted font-mono">{event.attendee_count} attending</span>
+            <span className="event-card-attendees">{event.attendee_count} attending</span>
           ) : null}
         </div>
       </div>

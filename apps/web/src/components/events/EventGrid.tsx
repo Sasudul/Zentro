@@ -10,14 +10,9 @@ export default function EventGrid() {
   const { filters } = useFilterStore();
   const { data, isLoading, error } = useEvents(filters);
 
-  // Loading state
   if (isLoading) {
     return (
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-        gap: 'var(--space-24)',
-      }}>
+      <div className="event-grid">
         {Array.from({ length: 6 }).map((_, i) => (
           <EventCardSkeleton key={i} />
         ))}
@@ -25,41 +20,24 @@ export default function EventGrid() {
     );
   }
 
-  // Error state
   if (error) {
     return (
-      <div style={{
-        padding: 'var(--space-48) 0',
-        textAlign: 'center',
-        border: '1px dashed var(--border)',
-        borderRadius: 'var(--radius-lg)',
-      }}>
-        <h3 className="font-serif text-lg mb-2">Something went wrong</h3>
-        <p className="text-muted text-sm">{error instanceof Error ? error.message : 'Failed to fetch events'}</p>
+      <div className="event-grid-error">
+        <h3 style={{ fontFamily: 'var(--font-serif)', marginBottom: 'var(--space-8)' }}>Something went wrong</h3>
+        <p className="text-secondary text-sm">{error instanceof Error ? error.message : 'Failed to fetch events'}</p>
       </div>
     );
   }
 
   const events = data?.data || [];
 
-  // Empty state
   if (events.length === 0) {
     return (
-      <div style={{
-        padding: 'var(--space-64) var(--space-24)',
-        textAlign: 'center',
-        border: '1px dashed var(--border)',
-        borderRadius: 'var(--radius-lg)',
-        backgroundColor: 'var(--bg-card)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 'var(--space-16)',
-      }}>
-        <SlidersHorizontal className="w-8 h-8 text-muted" />
+      <div className="event-grid-empty">
+        <SlidersHorizontal style={{ width: '32px', height: '32px', color: 'var(--color-text-muted)' }} />
         <div>
-          <h3 className="font-serif text-xl font-medium mb-2">No matching events found</h3>
-          <p className="text-muted text-sm" style={{ maxWidth: '400px', margin: '0 auto' }}>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', marginBottom: 'var(--space-8)' }}>No matching events found</h3>
+          <p className="text-secondary text-sm" style={{ maxWidth: '400px', margin: '0 auto' }}>
             We couldn&apos;t find any events matching your active filters. Try clearing some options or broadening your search!
           </p>
         </div>
@@ -68,20 +46,15 @@ export default function EventGrid() {
   }
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-      gap: 'var(--space-24)',
-    }}>
+    <div className="event-grid">
       {events.map((event) => (
         <EventCard
           key={event.id}
           event={event}
-          isBookmarked={false} // optimistic UI updates will be implemented in Sprint 4
+          isBookmarked={false}
           onBookmarkToggle={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Bookmark toggled for:', event.id);
           }}
         />
       ))}

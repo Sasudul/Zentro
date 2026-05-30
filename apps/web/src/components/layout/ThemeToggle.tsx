@@ -6,11 +6,9 @@ import { Sun, Moon } from 'lucide-react';
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  // Load theme from localStorage or system preference on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
     const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
@@ -24,15 +22,11 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="btn-bookmark"
-      aria-label="Toggle theme"
-    >
+    <button onClick={toggleTheme} className="btn-bookmark" aria-label="Toggle theme">
       {theme === 'light' ? (
-        <Moon className="w-4 h-4" />
+        <Moon style={{ width: '16px', height: '16px' }} />
       ) : (
-        <Sun className="w-4 h-4 text-amber-400" />
+        <Sun style={{ width: '16px', height: '16px', color: 'var(--color-accent)' }} />
       )}
     </button>
   );
