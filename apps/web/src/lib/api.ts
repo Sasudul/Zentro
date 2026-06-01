@@ -20,6 +20,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   }
 
   const response = await fetch(url, {
+    cache: 'no-store',
     ...options,
     headers,
     credentials: 'include', // Important to pass Express session cookies

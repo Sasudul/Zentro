@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Event } from '@zentro/shared';
 import { Badge } from '@/components/ui/Badge';
@@ -13,12 +13,17 @@ import { useBookmarks, useBookmarkMutation } from '@/hooks/useBookmarks';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
+import { useQueryClient } from '@tanstack/react-query';
 
 export function EventDetail({ event }: { event: Event }) {
   const { data: bookmarks } = useBookmarks();
   const { addBookmark, removeBookmark, isAdding, isRemoving } = useBookmarkMutation();
   const { user } = useAuth();
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const [error, setError] = useState<string | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isDeletingEvent, setIsDeletingEvent] = useState(false);
 
   const isBookmarked = event.is_bookmarked || bookmarks?.some(b => b.id === event.id);
   const isPending = isAdding || isRemoving;
@@ -37,20 +42,64 @@ export function EventDetail({ event }: { event: Event }) {
   };
 
   const handleDelete = async () => {
-    if (!window.confirm('Delete this event permanently?')) return;
-
     try {
+      setIsDeletingEvent(true);
+      setError(null);
       await api.events.delete(event.id);
+      queryClient.invalidateQueries({ queryKey: ['events'] });
+      queryClient.invalidateQueries({ queryKey: ['event', event.id] });
       router.push('/');
       router.refresh();
     } catch (err: any) {
-      alert(`Failed to delete event: ${err.message || err}`);
+      setError(`Failed to delete event: ${err.message || err}`);
+      setShowDeleteConfirm(false);
+    } finally {
+      setIsDeletingEvent(false);
     }
   };
 
   return (
-    <div className="detail-layout">
-      <div className="detail-main">
+    <div className="event-detail-container">
+      {showDeleteConfirm && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(15, 23, 42, 0.6)',
+          backdropFilter: 'blur(4px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 50,
+          padding: '24px'
+        }}>
+          <div style={{
+            backgroundColor: '#fff',
+            borderRadius: '16px',
+            padding: '32px',
+            width: '100%',
+            maxWidth: '400px',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+          }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1E293B', marginBottom: '12px', marginTop: 0 }}>
+              Delete Event
+            </h2>
+            <p style={{ color: '#475569', fontSize: '0.95rem', marginBottom: '24px', lineHeight: 1.5 }}>
+              Are you sure you want to permanently delete <strong>{event.title}</strong>? This action cannot be undone.
+            </p>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+              <Button variant="secondary" onClick={() => setShowDeleteConfirm(false)} disabled={isDeletingEvent}>
+                Cancel
+              </Button>
+              <Button variant="primary" style={{ backgroundColor: '#DC2626', borderColor: '#DC2626' }} onClick={handleDelete} disabled={isDeletingEvent}>
+                {isDeletingEvent ? 'Deleting...' : 'Yes, Delete'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="detail-layout">
+        <div className="detail-main">
         <header className="detail-header">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Badge variant={event.category as any}>{event.category}</Badge>
@@ -143,7 +192,6 @@ export function EventDetail({ event }: { event: Event }) {
             <div className="detail-divider" />
 
             <div className="detail-actions">
-              <Button size="lg" className="w-full">Get Tickets</Button>
               <Button
                 variant={isBookmarked ? 'primary' : 'secondary'}
                 size="lg"
@@ -160,11 +208,25 @@ export function EventDetail({ event }: { event: Event }) {
               <>
                 <div className="detail-divider" />
                 <div className="detail-actions">
+                  {error && (
+                    <div style={{
+                      padding: '12px',
+                      backgroundColor: '#FEF2F2',
+                      border: '1px solid #FCA5A5',
+                      borderRadius: '6px',
+                      color: '#DC2626',
+                      fontSize: '0.875rem',
+                      lineHeight: 1.4,
+                      marginBottom: '8px'
+                    }}>
+                      {error}
+                    </div>
+                  )}
                   <Link href={`/events/${event.id}/edit`} className="btn btn-secondary btn-lg w-full">
                     <Edit3 size={18} />
                     Edit Event
                   </Link>
-                  <Button variant="ghost" size="lg" className="w-full" onClick={handleDelete}>
+                  <Button variant="ghost" size="lg" className="w-full" onClick={() => setShowDeleteConfirm(true)}>
                     <Trash2 size={18} />
                     Delete Event
                   </Button>
@@ -184,5 +246,6 @@ export function EventDetail({ event }: { event: Event }) {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }

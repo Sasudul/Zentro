@@ -71,10 +71,10 @@ export default function SignupPage() {
         gridTemplateColumns: '1.2fr 1fr',
         gap: '48px'
       }} className="auth-grid-container">
-        
+
         {/* LEFT COLUMN */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          
+
           {/* Header Section (sits inside Banner, so height should align) */}
           <div style={{ minHeight: '372px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
             {/* Brand Logo */}
@@ -105,8 +105,6 @@ export default function SignupPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {[
                 'Simple, easy-to-use platform',
-                'Lowest ticketing fees',
-                'Dedicated customer support team',
                 'Powerful features'
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -129,136 +127,56 @@ export default function SignupPage() {
             </div>
           </div>
 
-          {/* Bottom Section (sits on White background) */}
-          <div style={{ marginTop: '56px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-            <div>
+          {/* Image Showcase Section */}
+          <div style={{
+            marginTop: '48px',
+            position: 'relative',
+            width: '100%',
+            flexGrow: 1,
+            minHeight: '300px',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+          }}>
+            <Image
+              src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80"
+              alt="Exciting event"
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+            {/* Gradient Overlay */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.2) 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-end',
+              padding: '32px'
+            }}>
+              <span style={{
+                color: '#00C26B',
+                fontSize: '0.75rem',
+                fontWeight: 800,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                marginBottom: '8px'
+              }}>
+                Experience the Energy
+              </span>
               <p style={{
-                fontSize: '0.875rem',
-                fontWeight: 700,
-                color: '#1E293B',
-                marginBottom: '24px',
-                letterSpacing: '-0.01em'
+                color: '#FFFFFF',
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                lineHeight: 1.4,
+                margin: 0,
+                maxWidth: '400px'
               }}>
-                10,000+ communities and organisers worldwide sell with Zentro
+                Join thousands of tech enthusiasts and discover your next favorite event in Sri Lanka.
               </p>
-              
-              {/* Partner Logos Grid */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: '24px 16px',
-                alignItems: 'center'
-              }}>
-                {/* Allison Park Church */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', opacity: 0.65 }}>
-                  <svg style={{ width: '20px', height: '20px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="7" />
-                    <path d="M12 8l3 7h-6z" fill="currentColor" />
-                  </svg>
-                  <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-                    <span style={{ fontSize: '0.625rem', fontWeight: 800, color: '#1E293B', letterSpacing: '0.02em', fontFamily: 'var(--font-sans)' }}>ALLISON PARK</span>
-                    <span style={{ fontSize: '0.45rem', color: '#64748B', fontWeight: 700, letterSpacing: '0.08em' }}>CHURCH</span>
-                  </div>
-                </div>
-
-                {/* Restitute */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', opacity: 0.65 }}>
-                  <svg style={{ width: '18px', height: '18px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M3 21h18M6 21V10l6-6 6 6v11M9 21v-6h6v6" />
-                  </svg>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 900, color: '#1E293B', letterSpacing: '0.06em', fontFamily: 'var(--font-sans)' }}>RESTITUTE</span>
-                </div>
-
-                {/* Quba Masjid */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', opacity: 0.65 }}>
-                  <svg style={{ width: '20px', height: '20px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v12M8 12h8M12 8a4 4 0 014 4M12 8a4 4 0 00-4 4" />
-                  </svg>
-                  <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-                    <span style={{ fontSize: '0.65rem', fontWeight: 800, color: '#1E293B', letterSpacing: '0.02em', fontFamily: 'var(--font-sans)' }}>QUBA</span>
-                    <span style={{ fontSize: '0.45rem', color: '#64748B', fontWeight: 700, letterSpacing: '0.08em' }}>MASJID</span>
-                  </div>
-                </div>
-
-                {/* Product Aotearoa */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', opacity: 0.65 }}>
-                  <svg style={{ width: '18px', height: '18px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 3l9 16H3z" />
-                  </svg>
-                  <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-                    <span style={{ fontSize: '0.625rem', fontWeight: 800, color: '#1E293B', letterSpacing: '0.02em', fontFamily: 'var(--font-sans)' }}>PRODUCT</span>
-                    <span style={{ fontSize: '0.45rem', color: '#64748B', fontWeight: 700, letterSpacing: '0.08em' }}>AOTEAROA</span>
-                  </div>
-                </div>
-
-                {/* Australia */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', opacity: 0.65 }}>
-                  <svg style={{ width: '18px', height: '18px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M12 8v8M8 12h8" />
-                  </svg>
-                  <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-                    <span style={{ fontSize: '0.5rem', color: '#64748B', fontWeight: 700, letterSpacing: '0.05em' }}>IPSC</span>
-                    <span style={{ fontSize: '0.625rem', fontWeight: 800, color: '#1E293B', letterSpacing: '0.02em', fontFamily: 'var(--font-sans)' }}>AUSTRALIA</span>
-                  </div>
-                </div>
-
-                {/* The Covey */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', opacity: 0.65 }}>
-                  <svg style={{ width: '16px', height: '16px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 16V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2z" />
-                  </svg>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 900, color: '#1E293B', fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
-                    THE COVEY
-                  </span>
-                </div>
-
-                {/* OMF */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', opacity: 0.65 }}>
-                  <svg style={{ width: '16px', height: '16px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <circle cx="12" cy="12" r="9" />
-                  </svg>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 900, color: '#1E293B', letterSpacing: '0.06em', fontFamily: 'var(--font-sans)' }}>OMF</span>
-                </div>
-
-                {/* IPSC */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', opacity: 0.65 }}>
-                  <svg style={{ width: '16px', height: '16px', color: '#1E293B', flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                  <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-                    <span style={{ fontSize: '0.55rem', fontWeight: 800, color: '#1E293B', fontFamily: 'var(--font-sans)' }}>IPSC</span>
-                    <span style={{ fontSize: '0.4rem', color: '#64748B', fontWeight: 700 }}>AUSTRALIA</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <hr style={{ border: 'none', borderTop: '1px solid #E2E8F0', margin: 0 }} />
-
-            {/* Testimonial Block */}
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
-              <div style={{ width: '80px', height: '80px', borderRadius: '16px', overflow: 'hidden', position: 'relative', flexShrink: 0, boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-                <Image 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&q=80" 
-                  alt="Amelie Duggan" 
-                  fill 
-                  style={{ objectFit: 'cover' }} 
-                />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <div style={{ display: 'flex', gap: '2px', color: '#F59E0B', fontSize: '0.875rem' }}>
-                  {Array.from({ length: 5 }).map((_, idx) => <span key={idx}>★</span>)}
-                </div>
-                <p style={{ fontSize: '0.875rem', lineHeight: 1.5, color: '#334155', margin: 0, fontWeight: 500 }}>
-                  "Fantastic customer service. I called and talked to real people who was patient and friendly."
-                </p>
-                <span style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#1E293B', marginTop: '2px' }}>
-                  Amelie Duggan
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -275,7 +193,7 @@ export default function SignupPage() {
             gap: '24px',
             border: '1px solid #F1F5F9'
           }} className="auth-card">
-            
+
             <h1 style={{
               fontSize: '1.75rem',
               fontWeight: 800,

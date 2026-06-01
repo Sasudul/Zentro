@@ -3,6 +3,8 @@ import { api } from '@/lib/api';
 import { EventDetail } from '@/components/events/EventDetail';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: { id: string };
 }

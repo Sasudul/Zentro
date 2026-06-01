@@ -2,6 +2,8 @@ import { api } from '@/lib/api';
 import { EventCreateForm } from '@/components/events/EventCreateForm';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: { id: string };
 }

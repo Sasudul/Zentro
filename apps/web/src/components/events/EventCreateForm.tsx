@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
 import { useAuth } from '@/hooks/useAuth';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface EventCreateFormProps {
   initialEvent?: Event;
@@ -25,8 +26,10 @@ function toDateTimeLocal(value?: string | null) {
 export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [tagsText, setTagsText] = useState(initialEvent?.tags?.join(', ') || '');
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const isEditing = mode === 'edit' && initialEvent;
   const isOwner = !isEditing || initialEvent.organizer?.id === user?.id;
@@ -65,11 +68,12 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-      alert('Image size exceeds the 5MB limit.');
+      setFormError('Image size exceeds the 5MB limit.');
       return;
     }
 
     try {
+      setFormError(null);
       setUploadingImage(true);
       const base64Str = await new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
@@ -93,7 +97,7 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
       const data = await response.json();
       setValue('image_url', data.url, { shouldValidate: true, shouldDirty: true });
     } catch (err: any) {
-      alert(`Failed to upload image: ${err.message || err}`);
+      setFormError(`Failed to upload image: ${err.message || err}`);
     } finally {
       setUploadingImage(false);
     }
@@ -106,12 +110,12 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
     }
 
     if (!isOwner) {
-      alert('You can only manage events that you created.');
-      router.push(initialEvent ? `/events/${initialEvent.id}` : '/');
+      setFormError('You can only manage events that you created.');
       return;
     }
 
     try {
+      setFormError(null);
       setIsSubmitting(true);
       const payload = {
         ...data,
@@ -126,10 +130,13 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
         ? await api.events.update(initialEvent.id, payload)
         : await api.events.create(payload);
 
+      queryClient.invalidateQueries({ queryKey: ['events'] });
+      queryClient.invalidateQueries({ queryKey: ['event', savedEvent.id] });
+
       router.push(`/events/${savedEvent.id}`);
       router.refresh();
     } catch (err: any) {
-      alert(`Failed to ${isEditing ? 'update' : 'create'} event: ${err.message || err}`);
+      setFormError(`Failed to ${isEditing ? 'update' : 'create'} event: ${err.message || err}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -287,6 +294,21 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
         {Object.keys(errors).length > 0 && (
           <div className="form-error" style={{ padding: 'var(--space-12)', border: '1px solid #FCA5A5', borderRadius: '8px' }}>
             Please correct the highlighted fields before publishing.
+          </div>
+        )}
+
+        {formError && (
+          <div style={{
+            padding: '12px',
+            backgroundColor: '#FEF2F2',
+            border: '1px solid #FCA5A5',
+            borderRadius: '6px',
+            color: '#DC2626',
+            fontSize: '0.875rem',
+            lineHeight: 1.4,
+            marginTop: '8px'
+          }}>
+            {formError}
           </div>
         )}
 
