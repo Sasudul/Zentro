@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
   avatar_url    TEXT,
   provider      TEXT NOT NULL,
   provider_id   TEXT NOT NULL UNIQUE,
+  password      TEXT,
   created_at    TIMESTAMPTZ DEFAULT now(),
   updated_at    TIMESTAMPTZ DEFAULT now()
 );
