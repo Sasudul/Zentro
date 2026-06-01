@@ -53,7 +53,7 @@ export default function Navbar() {
 
           <Link href="/events/create" className="navbar-primary-action">
             <CalendarPlus size={16} />
-            Create Event
+            <span>Create Event</span>
           </Link>
 
           <Link href="/saved" className="navbar-icon-action" aria-label="Bookmarks">

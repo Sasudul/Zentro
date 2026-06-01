@@ -23,10 +23,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const sessionMaxAge = Number(process.env.SESSION_MAX_AGE_MS || 30 * 24 * 60 * 60 * 1000);
 
-// CORS — allow frontend origin
+// CORS — allow frontend origin (trim trailing slash to prevent browser mismatch)
+const rawFrontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+const frontendUrl = rawFrontendUrl.endsWith('/') ? rawFrontendUrl.slice(0, -1) : rawFrontendUrl;
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: frontendUrl,
     credentials: true,
   })
 );

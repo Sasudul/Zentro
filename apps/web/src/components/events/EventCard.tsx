@@ -101,7 +101,7 @@ export default function EventCard({
         {isLive && <div className="event-card-live-strip" />}
         
         <div className="event-card-media-side">
-          <Link href={`/events/${event.id}`} style={{ display: 'block', width: '100%', height: '100%' }}>
+          <Link href={`/events/${event.id}`} style={{ display: 'block', width: '100%', height: '100%', position: 'relative' }}>
             <Image
               src={imageUrl}
               alt={event.title}
@@ -228,7 +228,7 @@ export default function EventCard({
     }}>
       {/* Top cover image */}
       <div style={{ height: '200px', width: '100%', position: 'relative', overflow: 'hidden' }}>
-        <Link href={`/events/${event.id}`} style={{ display: 'block', width: '100%', height: '100%' }}>
+        <Link href={`/events/${event.id}`} style={{ display: 'block', width: '100%', height: '100%', position: 'relative' }}>
           <Image
             src={imageUrl}
             alt={event.title}
