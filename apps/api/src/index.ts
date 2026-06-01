@@ -29,6 +29,13 @@ const sessionMaxAge = Number(process.env.SESSION_MAX_AGE_MS || 30 * 24 * 60 * 60
 const rawFrontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
 const frontendUrl = rawFrontendUrl.endsWith('/') ? rawFrontendUrl.slice(0, -1) : rawFrontendUrl;
 
+// Detect production by HTTPS frontend URL (more reliable than NODE_ENV)
+const isProduction = frontendUrl.startsWith('https://');
+
+console.log(`🌐 Environment: ${isProduction ? 'production' : 'development'}`);
+console.log(`🌐 CORS origin: ${frontendUrl}`);
+console.log(`🍪 Cookie: sameSite=${isProduction ? 'none' : 'lax'}, secure=${isProduction}`);
+
 app.use(
   cors({
     origin: frontendUrl,
@@ -69,10 +76,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProduction,       // Must be true for SameSite=None to work
       httpOnly: true,
       maxAge: sessionMaxAge,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      sameSite: isProduction ? 'none' : 'lax', // 'none' required for cross-domain (Vercel + Railway)
     },
   })
 );
