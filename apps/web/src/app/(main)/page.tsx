@@ -2,7 +2,6 @@
 
 import EventFilters from '@/components/events/EventFilters';
 import EventGrid from '@/components/events/EventGrid';
-import { Map, Calendar, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useFilterStore } from '@/store/filterStore';
@@ -82,14 +81,14 @@ export default function HomePage() {
             }}>
               Create Event
             </Link>
-            <Link href="/" style={{
+            <Link href="/saved" style={{
               color: '#FFFFFF',
               fontSize: '0.9375rem',
               fontWeight: 600,
               textDecoration: 'underline',
               fontFamily: 'var(--font-sans)'
             }}>
-              Book A Demo
+              View Bookmarks
             </Link>
           </div>
 

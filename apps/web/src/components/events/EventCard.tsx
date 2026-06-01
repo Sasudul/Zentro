@@ -108,6 +108,7 @@ export default function EventCard({
               fill
               sizes="(max-width: 768px) 100vw, 300px"
               priority={true}
+              unoptimized
             />
           </Link>
         </div>
@@ -170,7 +171,13 @@ export default function EventCard({
               <div className="event-card-organizer">
                 <div className="event-card-organizer-avatar">
                   {event.organizer.avatar_url ? (
-                    <Image src={event.organizer.avatar_url} alt={event.organizer.name} width={20} height={20} />
+                    <img
+                      src={event.organizer.avatar_url}
+                      alt={event.organizer.name}
+                      width={20}
+                      height={20}
+                      style={{ width: '20px', height: '20px', objectFit: 'cover' }}
+                    />
                   ) : (
                     <div style={{
                       width: '100%', height: '100%',
@@ -210,7 +217,7 @@ export default function EventCard({
     <article className="event-card" style={{
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: '#FFFFFF',
+      backgroundColor: 'var(--color-surface)',
       border: '1px solid var(--color-border)',
       borderRadius: '16px',
       overflow: 'hidden',
@@ -229,6 +236,7 @@ export default function EventCard({
             sizes="(max-width: 768px) 100vw, 400px"
             style={{ objectFit: 'cover' }}
             className="event-card-image"
+            unoptimized
           />
         </Link>
         
@@ -271,7 +279,6 @@ export default function EventCard({
             fontSize: '1.15rem',
             fontWeight: 700,
             lineHeight: 1.25,
-            color: 'var(--color-text-primary)',
             margin: 0,
             fontFamily: 'var(--font-sans)',
             display: '-webkit-box',
@@ -288,7 +295,7 @@ export default function EventCard({
           <span style={{
             fontSize: '0.6875rem',
             fontWeight: 600,
-            backgroundColor: 'var(--color-surface-2)',
+            backgroundColor: 'var(--color-accent-light)',
             color: 'var(--color-text-secondary)',
             padding: '3px 10px',
             borderRadius: '9999px',

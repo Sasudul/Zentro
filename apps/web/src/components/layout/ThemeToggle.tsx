@@ -27,10 +27,10 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
       style={{
         background: 'var(--color-navbar-pill-bg)',
-        border: 'none',
-        borderRadius: '6px',
-        width: '36px',
-        height: '36px',
+        border: '1px solid var(--color-navbar-border)',
+        borderRadius: '8px',
+        width: '40px',
+        height: '40px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

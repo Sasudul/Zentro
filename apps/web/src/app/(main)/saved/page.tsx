@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useBookmarks, useBookmarkMutation } from '@/hooks/useBookmarks';
 import EventCard from '@/components/events/EventCard';
 import { Bookmark } from 'lucide-react';
@@ -15,9 +15,21 @@ export default function SavedPage() {
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
 
-  if (!authLoading && !isAuthenticated) {
-    router.push('/login');
-    return null;
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.replace('/login');
+    }
+  }, [authLoading, isAuthenticated, router]);
+
+  if (authLoading || !isAuthenticated) {
+    return (
+      <div className="saved-page">
+        <div className="saved-header">
+          <h1>Saved Events</h1>
+          <p>Sign in to view your bookmarked events.</p>
+        </div>
+      </div>
+    );
   }
 
   return (

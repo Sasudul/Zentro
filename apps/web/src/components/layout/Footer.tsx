@@ -35,7 +35,7 @@ export default function Footer() {
             </div>
           </Link>
           <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0, maxWidth: '200px' }}>
-            Sri Lanka\'s premium and most robust ticketing and event discovery platform.
+            Sri Lanka's premium and most robust ticketing and event discovery platform.
           </p>
         </div>
 
@@ -49,13 +49,13 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/features" style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', textDecoration: 'none', transition: 'color 150ms ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-green-brand)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}>
-                Platform Features
+              <Link href="/saved" style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', textDecoration: 'none', transition: 'color 150ms ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-green-brand)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}>
+                Bookmarks
               </Link>
             </li>
             <li>
-              <Link href="/enterprise" style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', textDecoration: 'none', transition: 'color 150ms ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-green-brand)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}>
-                Enterprise Scaling
+              <Link href="/events/create" style={{ fontSize: '0.8125rem', color: 'var(--color-text-secondary)', textDecoration: 'none', transition: 'color 150ms ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-green-brand)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}>
+                Create Event
               </Link>
             </li>
           </ul>

@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateEventSchema, type CreateEvent, type Event } from '@zentro/shared';
 import { Button } from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
+import { useAuth } from '@/hooks/useAuth';
 
 interface EventCreateFormProps {
   initialEvent?: Event;
@@ -26,7 +27,9 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
   const [uploadingImage, setUploadingImage] = useState(false);
   const [tagsText, setTagsText] = useState(initialEvent?.tags?.join(', ') || '');
   const router = useRouter();
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const isEditing = mode === 'edit' && initialEvent;
+  const isOwner = !isEditing || initialEvent.organizer?.id === user?.id;
 
   const form = useForm<CreateEvent>({
     resolver: zodResolver(CreateEventSchema),
@@ -97,6 +100,17 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
   };
 
   const onSubmit = async (data: CreateEvent) => {
+    if (!isAuthenticated) {
+      router.push('/login');
+      return;
+    }
+
+    if (!isOwner) {
+      alert('You can only manage events that you created.');
+      router.push(initialEvent ? `/events/${initialEvent.id}` : '/');
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       const payload = {
@@ -120,6 +134,52 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.replace('/login');
+    }
+  }, [authLoading, isAuthenticated, router]);
+
+  if (authLoading) {
+    return (
+      <div style={{ padding: 'var(--space-96) var(--space-24)', textAlign: 'center' }}>
+        <p className="text-secondary">Checking your session...</p>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ maxWidth: '520px', margin: '0 auto', padding: 'var(--space-96) var(--space-24)', textAlign: 'center' }}>
+        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: 'var(--space-12)' }}>
+          Redirecting to sign in
+        </h1>
+        <p className="text-secondary" style={{ marginBottom: 'var(--space-24)' }}>
+          You need an account before you can publish or manage events.
+        </p>
+        <Button type="button" onClick={() => router.replace('/login')}>
+          Sign In
+        </Button>
+      </div>
+    );
+  }
+
+  if (!isOwner) {
+    return (
+      <div style={{ maxWidth: '560px', margin: '0 auto', padding: 'var(--space-96) var(--space-24)', textAlign: 'center' }}>
+        <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: 'var(--space-12)' }}>
+          You cannot edit this event
+        </h1>
+        <p className="text-secondary" style={{ marginBottom: 'var(--space-24)' }}>
+          Only the organizer who created this event can update or delete it.
+        </p>
+        <Button type="button" variant="secondary" onClick={() => router.push(initialEvent ? `/events/${initialEvent.id}` : '/')}>
+          Back to Event
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="create-event-page" style={{ maxWidth: '760px', margin: '0 auto', padding: 'var(--space-32) 0' }}>

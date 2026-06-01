@@ -82,9 +82,13 @@
   font-family: var(--font-serif);
   font-size: 1.25rem;
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-primary);
   margin: var(--space-4) 0;
+}
+
+[data-theme="dark"] .event-card-title {
+  color: #FFFFFF;
 }
 
 .event-card-date-time {
