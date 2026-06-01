@@ -27,6 +27,9 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: 'Zentro Event Booking — Premium Tickets & Events',
   description: 'Zentro is a premium, easy-to-use event ticketing and management platform with fair pricing and dedicated support.',
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({

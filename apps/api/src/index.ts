@@ -6,6 +6,7 @@ import session from 'express-session';
 import { RedisStore } from 'connect-redis';
 import passport from './config/passport.js';
 import { cache } from './config/redis.js';
+import { UpstashSessionStore } from './config/sessionStore.js';
 import { db } from './db/index.js';
 import { sql } from 'drizzle-orm';
 
@@ -48,7 +49,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Session and Store setup
 let sessionStore;
-if (cache.type === 'local-redis' && cache.rawClient) {
+if (cache.type === 'upstash' && cache.rawClient) {
+  sessionStore = new UpstashSessionStore({
+    client: cache.rawClient,
+    ttl: Math.ceil(sessionMaxAge / 1000),
+  });
+  console.log('📦 Sessions stored in Upstash Redis (HTTP)');
+} else if (cache.type === 'local-redis' && cache.rawClient) {
   sessionStore = new RedisStore({ client: cache.rawClient });
   console.log('📦 Sessions stored in local Redis');
 } else {

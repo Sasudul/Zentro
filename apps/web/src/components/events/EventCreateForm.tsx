@@ -133,8 +133,7 @@ export function EventCreateForm({ initialEvent, mode = 'create' }: EventCreateFo
       queryClient.invalidateQueries({ queryKey: ['events'] });
       queryClient.invalidateQueries({ queryKey: ['event', savedEvent.id] });
 
-      router.push(`/events/${savedEvent.id}`);
-      router.refresh();
+      window.location.href = `/events/${savedEvent.id}`;
     } catch (err: any) {
       setFormError(`Failed to ${isEditing ? 'update' : 'create'} event: ${err.message || err}`);
     } finally {
