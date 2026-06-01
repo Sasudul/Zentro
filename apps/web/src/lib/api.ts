@@ -1,4 +1,4 @@
-import type { EventFilters, Event, PaginatedResponse, User } from '@pulse/shared';
+import type { EventFilters, Event, PaginatedResponse, User } from '@zentro/shared';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
@@ -76,11 +76,39 @@ export const api = {
       });
       return response.data;
     },
+
+    update: async (id: string, eventData: any): Promise<Event> => {
+      const response = await request<{ data: Event }>(`/api/events/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(eventData),
+      });
+      return response.data;
+    },
+
+    delete: async (id: string): Promise<{ success: boolean }> => {
+      return request<{ success: boolean }>(`/api/events/${id}`, {
+        method: 'DELETE',
+      });
+    },
   },
 
   auth: {
     getMe: async (): Promise<User> => {
       const response = await request<{ data: User }>('/api/auth/me');
+      return response.data;
+    },
+    login: async (credentials: any): Promise<User> => {
+      const response = await request<{ data: User }>('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(credentials),
+      });
+      return response.data;
+    },
+    register: async (userData: any): Promise<User> => {
+      const response = await request<{ data: User }>('/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(userData),
+      });
       return response.data;
     },
     logout: async (): Promise<{ success: boolean }> => {

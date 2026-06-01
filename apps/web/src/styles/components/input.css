@@ -33,7 +33,7 @@
 
 .input-field:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 2px rgba(200, 90, 50, 0.12);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.12);
 }
 
 textarea.input-field {
@@ -53,6 +53,6 @@ select.input-field {
 
 .form-error {
   font-size: 0.75rem;
-  color: #C85A32;
+  color: #DC2626;
   margin-top: var(--space-2);
 }

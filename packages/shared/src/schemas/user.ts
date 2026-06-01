@@ -7,7 +7,7 @@ export const UserSchema = z.object({
   email: z.string().email(),
   name: z.string().min(1),
   avatar_url: z.string().url().nullable().optional(),
-  provider: z.enum(['google', 'github']),
+  provider: z.enum(['google', 'github', 'local']),
   provider_id: z.string(),
   created_at: z.string().datetime().optional(),
   updated_at: z.string().datetime().optional(),

@@ -1,15 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@pulse/shared'],
+  transpilePackages: ['@zentro/shared'],
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: '**',
       },
       {
-        protocol: 'https',
-        hostname: 'api.dicebear.com',
+        protocol: 'http',
+        hostname: '**',
       },
     ],
   },

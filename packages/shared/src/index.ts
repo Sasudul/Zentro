@@ -1,4 +1,4 @@
-// @pulse/shared — barrel export
+// @zentro/shared — barrel export
 
 // Schemas
 export {

@@ -22,11 +22,33 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button onClick={toggleTheme} className="btn-bookmark" aria-label="Toggle theme">
+    <button 
+      onClick={toggleTheme} 
+      aria-label="Toggle theme"
+      style={{
+        background: 'var(--color-navbar-pill-bg)',
+        border: 'none',
+        borderRadius: '6px',
+        width: '36px',
+        height: '36px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        color: 'var(--color-navbar-text)',
+        transition: 'background-color 150ms ease, color 150ms ease'
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = 'var(--color-bg)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'var(--color-navbar-pill-bg)';
+      }}
+    >
       {theme === 'light' ? (
-        <Moon style={{ width: '16px', height: '16px' }} />
+        <Moon style={{ width: '16px', height: '16px', color: 'var(--color-navbar-text)' }} />
       ) : (
-        <Sun style={{ width: '16px', height: '16px', color: 'var(--color-accent)' }} />
+        <Sun style={{ width: '16px', height: '16px', color: '#FBBF24' }} />
       )}
     </button>
   );

@@ -1,7 +1,7 @@
 export async function geocodeAddress(address: string, city: string): Promise<{ lat: number; lng: number } | null> {
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const apiKey = process.env.GOOGLE_GEOCODING_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
-    console.warn('GOOGLE_MAPS_API_KEY is not configured. Geocoding will be skipped.');
+    console.warn('GOOGLE_GEOCODING_API_KEY is not configured. Geocoding will be skipped.');
     return null;
   }
 
@@ -15,7 +15,7 @@ export async function geocodeAddress(address: string, city: string): Promise<{ l
       return null;
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as any;
     if (data.status === 'OK' && data.results && data.results.length > 0) {
       const location = data.results[0].geometry.location;
       return {

@@ -1,14 +1,24 @@
 'use client';
 
+import React from 'react';
 import { useFilterStore } from '@/store/filterStore';
 import { useEvents } from '@/hooks/useEvents';
 import EventCard from './EventCard';
 import { EventCardSkeleton } from '@/components/ui/Skeleton';
 import { SlidersHorizontal } from 'lucide-react';
+import { useBookmarks, useBookmarkMutation } from '@/hooks/useBookmarks';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 export default function EventGrid() {
   const { filters } = useFilterStore();
   const { data, isLoading, error } = useEvents(filters);
+  
+  // Real bookmark queries and mutation hooks
+  const { data: bookmarks } = useBookmarks();
+  const { addBookmark, removeBookmark } = useBookmarkMutation();
+  const { user } = useAuth();
+  const router = useRouter();
 
   if (isLoading) {
     return (
@@ -45,19 +55,41 @@ export default function EventGrid() {
     );
   }
 
+  const handleBookmarkToggle = async (e: React.MouseEvent, eventId: string, isCurrentlyBookmarked: boolean) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (!user) {
+      router.push('/login');
+      return;
+    }
+
+    try {
+      if (isCurrentlyBookmarked) {
+        await removeBookmark(eventId);
+      } else {
+        await addBookmark(eventId);
+      }
+    } catch (err) {
+      console.error('Failed to toggle bookmark:', err);
+    }
+  };
+
   return (
     <div className="event-grid">
-      {events.map((event) => (
-        <EventCard
-          key={event.id}
-          event={event}
-          isBookmarked={false}
-          onBookmarkToggle={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
-        />
-      ))}
+      {events.map((event, index) => {
+        const isBookmarked = event.is_bookmarked || bookmarks?.some((b) => b.id === event.id) || false;
+        
+        return (
+          <EventCard
+            key={event.id}
+            event={event}
+            variant={index === 0 ? 'featured' : 'default'}
+            isBookmarked={isBookmarked}
+            onBookmarkToggle={(e) => handleBookmarkToggle(e, event.id, isBookmarked)}
+          />
+        );
+      })}
     </div>
   );
 }

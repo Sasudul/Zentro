@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const event = await api.events.get(params.id);
     return {
-      title: `${event.title} | PULSE`,
+      title: `${event.title} | Zentro`,
       description: (event.description || '').replace(/<[^>]*>?/gm, '').substring(0, 160),
     };
   } catch (error) {
     return {
-      title: 'Event Not Found | PULSE',
+      title: 'Event Not Found | Zentro',
     };
   }
 }

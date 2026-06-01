@@ -354,7 +354,11 @@ export async function updateEvent(req: Request, res: Response, next: NextFunctio
 
     // Check ownership
     const [existing] = await db
-      .select({ organizer_id: events.organizer_id })
+      .select({ 
+        organizer_id: events.organizer_id,
+        location_name: events.location_name,
+        location_city: events.location_city 
+      })
       .from(events)
       .where(eq(events.id, id))
       .limit(1);
@@ -376,10 +380,10 @@ export async function updateEvent(req: Request, res: Response, next: NextFunctio
       updateData.end_time = new Date(updateData.end_time);
     }
 
-    // Try to geocode if address and city are provided (or updated)
-    if (updateData.address || updateData.city) {
-      const address = updateData.address || existing.address;
-      const city = updateData.city || existing.city;
+    // Try to geocode if location_name and location_city are provided (or updated)
+    if (updateData.location_name || updateData.location_city) {
+      const address = updateData.location_name || existing.location_name;
+      const city = updateData.location_city || existing.location_city;
       if (address && city) {
         const coords = await geocodeAddress(address as string, city as string);
         if (coords) {

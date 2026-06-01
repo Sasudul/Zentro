@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { EventFilters } from '@pulse/shared';
+import type { EventFilters } from '@zentro/shared';
 
 interface FilterState {
   filters: Partial<EventFilters>;

@@ -1,8 +1,8 @@
 {
-  "name": "pulse",
+  "name": "zentro",
   "version": "0.1.0",
   "private": true,
-  "description": "PULSE — Smart Event Management Platform",
+  "description": "Zentro — Smart Event Management Platform",
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",

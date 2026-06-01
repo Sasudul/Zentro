@@ -28,43 +28,50 @@
   --transition-fast: 150ms ease;
   --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Zentro Brand Variables */
+  --color-teal-dark: #071E22;
+  --color-teal-darker: #041417;
+  --color-teal-light: #0d2c31;
+  --color-green-brand: #10B981;
+  --color-green-brand-hover: #059669;
 }
 
-/* ── Light: Warm Canvas ── */
+/* ── Light: Stark Swiss ── */
 :root, [data-theme="light"] {
-  --color-bg: #FAF9F6;
-  --color-surface: #FFFFFF;
-  --color-surface-2: #F4F2EE;
-  --color-surface-3: #EAE8E2;
+  --color-bg: #FAFAFC;          /* stunning modern gallery white */
+  --color-surface: #FFFFFF;     /* pure white surfaces */
+  --color-surface-2: #F4F4F7;   /* premium soft recessive grey */
+  --color-surface-3: #EAEAEF;   /* hover focus highlights */
 
-  --color-border: #E6E4E0;
-  --color-border-strong: #CCCAC4;
+  --color-border: #E5E5EB;      /* ultra-thin modern light border */
+  --color-border-strong: #1F1F2E; /* authoritative dark charcoal border */
 
-  --color-accent: #C85A32;
-  --color-accent-light: #F2E4DC;
-  --color-accent-dark: #9E3F1E;
+  --color-accent: #4F46E5;      /* Stunning premium Indigo accent */
+  --color-accent-light: #EEF2FF; /* super soft lavender/indigo tint */
+  --color-accent-dark: #3730A3;  /* deep rich indigo */
 
-  --color-live: #2E6E4E;
-  --color-live-bg: #E6F3EC;
-  --color-upcoming: #1A5FAB;
-  --color-upcoming-bg: #E5EEFA;
-  --color-past: #9A9790;
-  --color-saved: #B85A1C;
-  --color-saved-bg: #FDF0E8;
+  --color-live: #10B981;        /* beautiful emerald green for active status */
+  --color-live-bg: #ECFDF5;
+  --color-upcoming: #4F46E5;    /* indigo upcoming */
+  --color-upcoming-bg: #EEF2FF;
+  --color-past: #6B7280;        /* crisp mid-slate gray */
+  --color-saved: #F59E0B;       /* warm amber-gold */
+  --color-saved-bg: #FEF3C7;
 
-  --color-text-primary: #1C1A17;
-  --color-text-secondary: #706E6B;
-  --color-text-muted: #A8A5A0;
+  --color-text-primary: #111827;   /* deep slate-black */
+  --color-text-secondary: #4B5563; /* corporate mid-slate text */
+  --color-text-muted: #9CA3AF;     /* subtle placeholder/meta text */
   --color-text-on-accent: #FFFFFF;
 
-  --weather-clear: rgba(200, 90, 50, 0.04);
-  --weather-rain: rgba(60, 100, 200, 0.05);
-  --weather-cloud: rgba(120, 120, 130, 0.04);
-  --weather-storm: rgba(100, 40, 40, 0.05);
+  --weather-clear: rgba(79, 70, 229, 0.04);
+  --weather-rain: rgba(59, 130, 246, 0.05);
+  --weather-cloud: rgba(107, 114, 128, 0.04);
+  --weather-storm: rgba(220, 38, 38, 0.04);
 
-  --shadow-sm: 0 1px 3px rgba(28, 26, 23, 0.06);
-  --shadow-md: 0 4px 12px rgba(28, 26, 23, 0.08);
-  --shadow-lg: 0 12px 32px rgba(28, 26, 23, 0.10);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
 
   /* backward compat aliases */
   --bg-main: var(--color-bg);
@@ -76,6 +83,15 @@
   --accent-glow: var(--color-accent-light);
   --border: var(--color-border);
   --border-focus: var(--color-border-strong);
+
+  --color-navbar: #FFFFFF;
+  --color-navbar-text: #111827;
+  --color-navbar-link: #4B5563;
+  --color-navbar-border: #E5E5EB;
+  --color-navbar-logo-text: #111827;
+  --color-navbar-greetings: #4B5563;
+  --color-navbar-pill-bg: #F3F4F6;
+  --color-navbar-pill-text: #1F2937;
 }
 
 /* ── Dark: Midnight Obsidian ── */
@@ -123,4 +139,13 @@
   --accent-glow: var(--color-accent-light);
   --border: var(--color-border);
   --border-focus: var(--color-border-strong);
+
+  --color-navbar: #071E22;
+  --color-navbar-text: #FFFFFF;
+  --color-navbar-link: rgba(255, 255, 255, 0.9);
+  --color-navbar-border: rgba(255, 255, 255, 0.08);
+  --color-navbar-logo-text: #FFFFFF;
+  --color-navbar-greetings: #FFFFFF;
+  --color-navbar-pill-bg: rgba(255, 255, 255, 0.08);
+  --color-navbar-pill-text: #FFFFFF;
 }

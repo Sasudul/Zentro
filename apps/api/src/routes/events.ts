@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { EventFiltersSchema, CreateEventSchema, UpdateEventSchema } from '@pulse/shared';
+import { EventFiltersSchema, CreateEventSchema, UpdateEventSchema } from '@zentro/shared';
 import { validateQuery, validate } from '../middleware/validate.js';
 import { requireAuth } from '../middleware/requireAuth.js';
 import {

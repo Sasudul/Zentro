@@ -39,14 +39,10 @@ if (googleClientId && googleClientSecret) {
       },
       async (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
         try {
-          const email = profile.emails?.[0]?.value;
+          const email = profile.emails?.[0]?.value || `${profile.id}@google.placeholder`;
           const name = profile.displayName || profile.name?.givenName || 'Google User';
           const avatarUrl = profile.photos?.[0]?.value;
           const providerId = `google-${profile.id}`;
-
-          if (!email) {
-            return done(new Error('No email found in Google profile'));
-          }
 
           // Upsert logic
           const [existingUser] = await db

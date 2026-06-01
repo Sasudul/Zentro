@@ -1,5 +1,5 @@
 {
-  "name": "@pulse/api",
+  "name": "@zentro/api",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -13,8 +13,9 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
-    "@pulse/shared": "workspace:*",
+    "@zentro/shared": "workspace:*",
     "@upstash/redis": "^1.38.0",
+    "cloudinary": "^2.10.0",
     "connect-redis": "^9.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

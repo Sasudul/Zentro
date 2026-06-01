@@ -1,11 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
-import { Event } from '@pulse/shared';
+import { Event } from '@zentro/shared';
+import { useAuth } from './useAuth';
 
 export function useBookmarks() {
+  const { isAuthenticated } = useAuth();
   return useQuery({
     queryKey: ['bookmarks'],
     queryFn: () => api.bookmarks.list(),
+    enabled: isAuthenticated,
   });
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useFilterStore } from '@/store/filterStore';
-import { X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 
 export default function EventFilters() {
   const { filters, setFilter, resetFilters } = useFilterStore();
@@ -34,13 +34,30 @@ export default function EventFilters() {
     setFilter('city', e.target.value || undefined);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter('q', e.target.value || undefined);
+  };
+
   const hasActiveFilters =
+    (filters.q !== undefined && filters.q !== '') ||
     filters.category !== undefined ||
     filters.format !== undefined ||
     (filters.city !== undefined && filters.city !== '');
 
   return (
     <div className="filter-container">
+      <div className="filter-search">
+        <Search style={{ width: '16px', height: '16px', color: 'var(--color-text-muted)' }} />
+        <input
+          type="search"
+          value={filters.q || ''}
+          onChange={handleSearchChange}
+          placeholder="Search tech events..."
+          className="input-field"
+          aria-label="Search events"
+        />
+      </div>
+
       <div className="filter-row">
         <div className="filter-tabs">
           {categories.map((cat) => (
@@ -79,10 +96,19 @@ export default function EventFilters() {
 
       {hasActiveFilters ? (
         <div className="active-chips">
+          {filters.q ? (
+            <div className="filter-chip">
+              <span>Search: {filters.q}</span>
+              <button onClick={() => setFilter('q', '')} className="filter-chip-remove" aria-label="Clear search">
+                <X style={{ width: '12px', height: '12px' }} />
+              </button>
+            </div>
+          ) : null}
+
           {filters.category ? (
             <div className="filter-chip">
               <span>Category: {filters.category}</span>
-              <button onClick={() => setFilter('category', undefined)} className="filter-chip-remove">
+              <button onClick={() => setFilter('category', undefined)} className="filter-chip-remove" aria-label="Clear category filter">
                 <X style={{ width: '12px', height: '12px' }} />
               </button>
             </div>
@@ -91,7 +117,7 @@ export default function EventFilters() {
           {filters.format ? (
             <div className="filter-chip">
               <span>Format: {filters.format}</span>
-              <button onClick={() => setFilter('format', undefined)} className="filter-chip-remove">
+              <button onClick={() => setFilter('format', undefined)} className="filter-chip-remove" aria-label="Clear format filter">
                 <X style={{ width: '12px', height: '12px' }} />
               </button>
             </div>
@@ -100,7 +126,7 @@ export default function EventFilters() {
           {filters.city ? (
             <div className="filter-chip">
               <span>City: {filters.city}</span>
-              <button onClick={() => setFilter('city', '')} className="filter-chip-remove">
+              <button onClick={() => setFilter('city', '')} className="filter-chip-remove" aria-label="Clear city filter">
                 <X style={{ width: '12px', height: '12px' }} />
               </button>
             </div>

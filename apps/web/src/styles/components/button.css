@@ -112,9 +112,8 @@
 }
 
 .editorial-link {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 0.9375rem;
-  font-style: italic;
   color: var(--color-text-primary);
   border-bottom: 1.5px solid var(--color-accent);
   padding-bottom: 2px;

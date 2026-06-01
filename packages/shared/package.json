@@ -1,5 +1,5 @@
 {
-  "name": "@pulse/shared",
+  "name": "@zentro/shared",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.ts",

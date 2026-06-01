@@ -22,7 +22,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
           </h2>
         </div>
         <div className="auth-sidebar-quote">
-          &ldquo;PULSE is where the community gathers to share ideas, build connections, and create the future together.&rdquo;
+          &ldquo;Zentro is where the community gathers to share ideas, build connections, and create the future together.&rdquo;
         </div>
       </div>
     </div>

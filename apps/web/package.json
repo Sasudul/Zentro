@@ -1,5 +1,5 @@
 {
-  "name": "@pulse/web",
+  "name": "@zentro/web",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
-    "@pulse/shared": "workspace:*",
+    "@zentro/shared": "workspace:*",
     "@tanstack/react-query": "^5.38.0",
     "@tiptap/extension-placeholder": "^3.23.6",
     "@tiptap/react": "^3.23.6",

@@ -12,6 +12,22 @@ export function useAuth() {
     staleTime: 10 * 60 * 1000, // 10 minutes cache
   });
 
+  const loginMutation = useMutation({
+    mutationFn: api.auth.login,
+    onSuccess: (user) => {
+      queryClient.setQueryData(['auth-user'], user);
+      queryClient.invalidateQueries();
+    },
+  });
+
+  const registerMutation = useMutation({
+    mutationFn: api.auth.register,
+    onSuccess: (user) => {
+      queryClient.setQueryData(['auth-user'], user);
+      queryClient.invalidateQueries();
+    },
+  });
+
   const logoutMutation = useMutation({
     mutationFn: api.auth.logout,
     onSuccess: () => {
@@ -25,6 +41,10 @@ export function useAuth() {
     user: query.data ?? null,
     isLoading: query.isLoading,
     isAuthenticated: !!query.data,
+    login: loginMutation.mutateAsync,
+    isLoggingIn: loginMutation.isPending,
+    register: registerMutation.mutateAsync,
+    isRegistering: registerMutation.isPending,
     logout: logoutMutation.mutateAsync,
     isLoggingOut: logoutMutation.isPending,
   };

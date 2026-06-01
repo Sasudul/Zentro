@@ -19,8 +19,9 @@ export const users = pgTable('users', {
   email: text('email').notNull().unique(),
   name: text('name').notNull(),
   avatar_url: text('avatar_url'),
-  provider: text('provider').notNull(), // 'google' | 'github'
+  provider: text('provider').notNull(), // 'google' | 'github' | 'local'
   provider_id: text('provider_id').notNull().unique(),
+  password: text('password'),
   created_at: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updated_at: timestamp('updated_at', { withTimezone: true }).defaultNow(),
 });

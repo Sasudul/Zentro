@@ -1,5 +1,5 @@
 import React from 'react';
-import { Event } from '@pulse/shared';
+import { Event } from '@zentro/shared';
 import { formatDate } from '@/lib/utils';
 import { Badge } from '@/components/ui/Badge';
 

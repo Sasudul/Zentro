@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useBookmarks } from '@/hooks/useBookmarks';
+import { useBookmarks, useBookmarkMutation } from '@/hooks/useBookmarks';
 import EventCard from '@/components/events/EventCard';
 import { Bookmark } from 'lucide-react';
 import Link from 'next/link';
@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 
 export default function SavedPage() {
   const { data: bookmarks, isLoading } = useBookmarks();
+  const { removeBookmark } = useBookmarkMutation();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
 
@@ -35,7 +36,16 @@ export default function SavedPage() {
       ) : bookmarks && bookmarks.length > 0 ? (
         <div className="saved-grid">
           {bookmarks.map((event) => (
-            <EventCard key={event.id} event={event} />
+            <EventCard
+              key={event.id}
+              event={event}
+              isBookmarked={true}
+              onBookmarkToggle={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                removeBookmark(event.id);
+              }}
+            />
           ))}
         </div>
       ) : (

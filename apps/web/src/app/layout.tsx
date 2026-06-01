@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Lora, Plus_Jakarta_Sans, Space_Mono } from 'next/font/google';
 import Providers from '@/components/providers/Providers';
 import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import './globals.css';
 
 const lora = Lora({
@@ -24,8 +25,8 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'PULSE — Discover Premium Tech Events',
-  description: 'Curated technical conferences, meetups, hackathons, and workshops globally with live weather and mapping details.',
+  title: 'Zentro Event Booking — Premium Tickets & Events',
+  description: 'Zentro is a premium, easy-to-use event ticketing and management platform with fair pricing and dedicated support.',
 };
 
 export default function RootLayout({
@@ -45,6 +46,7 @@ export default function RootLayout({
           <main className="main-content">
             {children}
           </main>
+          <Footer />
         </Providers>
       </body>
     </html>

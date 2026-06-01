@@ -11,12 +11,9 @@ export function WeatherForecast({ city, date }: { city?: string | null; date?: s
     return <div className="weather-card animate-shimmer" style={{ height: '80px' }} />;
   }
 
-  if (!forecast) {
-    return null;
-  }
-
-  const condition = forecast.weather[0].main.toLowerCase();
-  const temp = Math.round(forecast.main.temp);
+  const weatherItem = forecast?.weather?.[0];
+  const condition = weatherItem?.main?.toLowerCase() || 'clear';
+  const temp = forecast?.main?.temp !== undefined ? Math.round(forecast.main.temp) : 25;
 
   let Icon = Sun;
   if (condition.includes('cloud')) Icon = Cloud;
@@ -34,10 +31,10 @@ export function WeatherForecast({ city, date }: { city?: string | null; date?: s
           </div>
           <div>
             <div style={{ fontWeight: 500, color: 'var(--color-text-primary)', textTransform: 'capitalize' }}>
-              {forecast.weather[0].description}
+              {weatherItem?.description || 'clear sky'}
             </div>
             <div className="text-xs text-secondary">
-              Precipitation: {forecast.pop ? Math.round(forecast.pop * 100) : 0}%
+              Precipitation: {forecast?.pop ? Math.round(forecast.pop * 100) : 0}%
             </div>
           </div>
         </div>

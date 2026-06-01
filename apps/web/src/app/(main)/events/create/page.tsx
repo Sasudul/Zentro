@@ -2,7 +2,7 @@ import React from 'react';
 import { EventCreateForm } from '@/components/events/EventCreateForm';
 
 export const metadata = {
-  title: 'Create Event | PULSE',
+  title: 'Create Event | Zentro',
 };
 
 export default function CreateEventPage() {

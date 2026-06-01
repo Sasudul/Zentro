@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
-import { Event } from '@pulse/shared';
+import { Event } from '@zentro/shared';
 import { EventMapPin } from './EventMapPin';
 import { MapPreviewCard } from './MapPreviewCard';
 import { useRouter } from 'next/navigation';
@@ -15,8 +15,8 @@ export function MapPanel({ events }: MapPanelProps) {
   const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
   const router = useRouter();
 
-  // Basic center, maybe calculate bounds of events later
-  const defaultCenter = { lat: 37.7749, lng: -122.4194 };
+  // Center the map on Sri Lanka on load
+  const defaultCenter = { lat: 7.8731, lng: 80.7718 };
   const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAPS_ID || 'DEMO_MAP_ID';
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
@@ -36,7 +36,7 @@ export function MapPanel({ events }: MapPanelProps) {
       <APIProvider apiKey={apiKey}>
         <Map
           defaultCenter={defaultCenter}
-          defaultZoom={4}
+          defaultZoom={7.5}
           mapId={mapId}
           disableDefaultUI={true}
           className="w-full h-full"

@@ -1,16 +1,18 @@
 'use client';
 
 import React from 'react';
-import { Event } from '@pulse/shared';
+import Link from 'next/link';
+import { Event } from '@zentro/shared';
 import { Badge } from '@/components/ui/Badge';
 import { TagPill } from '@/components/ui/TagPill';
 import { Button } from '@/components/ui/Button';
-import { Calendar, MapPin, Users, ExternalLink, Bookmark, ShieldCheck } from 'lucide-react';
+import { Calendar, MapPin, Users, ExternalLink, Bookmark, ShieldCheck, Edit3, Trash2 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { WeatherForecast } from '@/components/weather/WeatherForecast';
 import { useBookmarks, useBookmarkMutation } from '@/hooks/useBookmarks';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import { api } from '@/lib/api';
 
 export function EventDetail({ event }: { event: Event }) {
   const { data: bookmarks } = useBookmarks();
@@ -20,6 +22,7 @@ export function EventDetail({ event }: { event: Event }) {
 
   const isBookmarked = event.is_bookmarked || bookmarks?.some(b => b.id === event.id);
   const isPending = isAdding || isRemoving;
+  const isOrganizer = !!user && event.organizer?.id === user.id;
 
   const handleBookmarkToggle = () => {
     if (!user) {
@@ -30,6 +33,18 @@ export function EventDetail({ event }: { event: Event }) {
       removeBookmark(event.id);
     } else {
       addBookmark(event.id);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm('Delete this event permanently?')) return;
+
+    try {
+      await api.events.delete(event.id);
+      router.push('/');
+      router.refresh();
+    } catch (err: any) {
+      alert(`Failed to delete event: ${err.message || err}`);
     }
   };
 
@@ -140,6 +155,22 @@ export function EventDetail({ event }: { event: Event }) {
                 {isBookmarked ? 'Saved' : 'Save Event'}
               </Button>
             </div>
+
+            {isOrganizer && (
+              <>
+                <div className="detail-divider" />
+                <div className="detail-actions">
+                  <Link href={`/events/${event.id}/edit`} className="btn btn-secondary btn-lg w-full">
+                    <Edit3 size={18} />
+                    Edit Event
+                  </Link>
+                  <Button variant="ghost" size="lg" className="w-full" onClick={handleDelete}>
+                    <Trash2 size={18} />
+                    Delete Event
+                  </Button>
+                </div>
+              </>
+            )}
 
             {event.url && (
               <a href={event.url} target="_blank" rel="noopener noreferrer" className="detail-external-link">

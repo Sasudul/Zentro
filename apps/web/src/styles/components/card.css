@@ -1,3 +1,5 @@
+/* ── Premium Editorial Event Cards ── */
+
 .event-card {
   display: flex;
   flex-direction: column;
@@ -5,110 +7,126 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1), 
+              border-color 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: pointer;
+  position: relative;
 }
 
+/* Hover: subtle lift and stronger border, matching print outline */
 .event-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
   border-color: var(--color-border-strong);
 }
 
-.event-card-live {
-  border-left: 3px solid var(--color-live);
-}
-
 .event-card-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 160px;
   background-color: var(--color-surface-2);
   overflow: hidden;
   border-bottom: 1px solid var(--color-border);
 }
 
 .event-card-media img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   transition: transform var(--transition-slow);
 }
 
 .event-card:hover .event-card-media img {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
+
+/* Live indicators: clean left border indicator */
+.event-card-live-strip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--color-live);
+}
+
+/* ── Typography & Content Spacing ── */
 
 .event-card-content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 20px 24px;
+  padding: 24px;
   gap: var(--space-12);
 }
 
 .event-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-8);
+  align-items: center;
+}
+
+/* Metadata row — Space Mono print style */
+.event-card-mono-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
 }
 
 .event-card-title {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
-  line-height: 1.3;
+  font-size: 1.25rem;
+  line-height: 1.2;
   font-weight: 600;
   color: var(--color-text-primary);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  margin: var(--space-4) 0;
 }
 
-.event-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-12);
+.event-card-date-time {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--color-text-muted);
-}
-
-.event-card-meta-item {
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-}
-
-.event-card-meta-item svg {
-  color: var(--color-accent);
+  gap: var(--space-6);
 }
 
 .event-card-description {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.5;
+  margin-bottom: var(--space-4);
 }
 
 .event-card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-8);
+  gap: var(--space-6);
   margin-top: auto;
-  padding-top: var(--space-8);
 }
 
+/* Divider — crisp print dashed line */
+.event-card-divider {
+  border-top: 1px dashed var(--color-border);
+  margin: var(--space-8) 0 var(--space-4) 0;
+}
+
+/* Footer row */
 .event-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: var(--space-12);
-  border-top: 1px dashed var(--color-border);
+  font-size: 0.75rem;
 }
 
 .event-card-organizer {
@@ -118,22 +136,124 @@
 }
 
 .event-card-organizer-avatar {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: var(--radius-full);
   overflow: hidden;
   background-color: var(--color-surface-2);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-strong);
 }
 
 .event-card-organizer-name {
-  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--color-text-primary);
 }
 
-.event-card-attendees {
+.event-card-footer-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   color: var(--color-text-muted);
+}
+
+/* ── Featured Event Card (Spans 2 columns, horizontal layout) ── */
+
+@media (min-width: 768px) {
+  .event-card.featured {
+    grid-column: span 2;
+    flex-direction: row;
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .event-card.featured .event-card-media-side {
+    width: 240px;
+    position: relative;
+    flex-shrink: 0;
+    border-left: 1px solid var(--color-border);
+    background-color: var(--color-surface-2);
+    overflow: hidden;
+    order: 2; /* Image on the right for elegant print layout */
+  }
+
+  .event-card.featured .event-card-media-side img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-slow);
+  }
+
+  .event-card.featured:hover .event-card-media-side img {
+    transform: scale(1.04);
+  }
+
+  .event-card.featured .event-card-content {
+    flex: 1;
+    order: 1;
+    padding: 32px;
+    gap: var(--space-16);
+  }
+
+  .event-card.featured .event-card-title {
+    font-size: 1.625rem;
+  }
+
+  .event-card.featured .event-card-description {
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* ── Compact Event Card (Used in sidebars/related lists) ── */
+
+.event-card.compact {
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.event-card.compact .compact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.event-card.compact .compact-title {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-card.compact .compact-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+}
+
+/* ── Dynamic Ambient Weather Color Tints ── */
+
+.event-card.weather-clear {
+  background: linear-gradient(135deg, rgba(200, 90, 50, 0.04) 0%, transparent 100%), var(--color-surface);
+}
+
+.event-card.weather-cloud {
+  background: linear-gradient(135deg, rgba(120, 120, 130, 0.04) 0%, transparent 100%), var(--color-surface);
+}
+
+.event-card.weather-rain {
+  background: linear-gradient(135deg, rgba(60, 100, 200, 0.05) 0%, transparent 100%), var(--color-surface);
+}
+
+.event-card.weather-storm {
+  background: linear-gradient(135deg, rgba(100, 40, 40, 0.05) 0%, transparent 100%), var(--color-surface);
 }

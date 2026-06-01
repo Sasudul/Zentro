@@ -6,4 +6,4 @@ export type {
   PaginatedResponse,
   EventCategoryEnum,
   EventFormatEnum,
-} from '@pulse/shared';
+} from '@zentro/shared';
